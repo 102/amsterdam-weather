@@ -1,7 +1,7 @@
 name: data
 on:
   schedule:
-    - cron: 55 * * * *
+    - cron: 17 * * * *
   workflow_dispatch: {}
   push:
     paths:
@@ -20,7 +20,7 @@ jobs:
       - name: Fetch data
         uses: githubocto/flat@3.4.0
         with:
-          http_url: https://api.openweathermap.org/data/2.5/weather?lat=54.99&lon=73.36&units=metric&appid=${{ secrets.OPENWEATHERMAP_API_KEY }}
+          http_url: https://api.openweathermap.org/data/2.5/weather?lat=52.36&lon=4.9&units=metric&appid=${{ secrets.OPENWEATHERMAP_API_KEY }}
           downloaded_filename: weather.json
           postprocess: ./postprocess.ts
           mask: '["${{ secrets.API_KEY }}", "${{ secrets.OPENWEATHERMAP_API_KEY }}"]'
