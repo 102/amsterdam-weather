@@ -23,4 +23,4 @@ jobs:
           http_url: https://api.openweathermap.org/data/2.5/weather?lat=52.36&lon=4.9&units=metric&appid=${{ secrets.OPENWEATHERMAP_API_KEY }}
           downloaded_filename: weather.json
           postprocess: ./postprocess.ts
-          mask: '["${{ secrets.API_KEY }}", "${{ secrets.OPENWEATHERMAP_API_KEY }}"]'
+          mask: '["${{ secrets.OPENWEATHERMAP_API_KEY }}"]'
