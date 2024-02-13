@@ -1,0 +1,26 @@
+name: data
+on:
+  schedule:
+    - cron: 55 * * * *
+  workflow_dispatch: {}
+  push:
+    paths:
+      - .github/workflows/flat.yml
+      - ./postprocess.ts
+jobs:
+  scheduled:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup deno
+        uses: denoland/setup-deno@main
+        with:
+          deno-version: v1.x
+      - name: Check out repo
+        uses: actions/checkout@v3
+      - name: Fetch data
+        uses: githubocto/flat@3.4.0
+        with:
+          http_url: https://api.openweathermap.org/data/2.5/weather?lat=54.99&lon=73.36&units=metric&appid=${{ secrets.OPENWEATHERMAP_API_KEY }}
+          downloaded_filename: weather.json
+          postprocess: ./postprocess.ts
+          mask: '["${{ secrets.API_KEY }}", "${{ secrets.OPENWEATHERMAP_API_KEY }}"]'
